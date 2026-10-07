@@ -8,18 +8,18 @@ This repository distributes binaries and public usage documentation. The source 
 is private. Download executables from [Releases](https://github.com/tinkrtailor/cleared-cli/releases);
 GitHub's automatic “Source code” archives contain only this distribution repository.
 
-## Install v0.2.1
+## Install v0.2.2
 
-v0.2.1 tolerates harmless empty connections to the login loopback listener. The
-cause of the original intermittent browser-login failure remains unproven; this
-patch does not establish that all login failures are fixed.
+v0.2.2 fixes payment-check pagination and correctly recognizes healthy hybrid
+reads as complete. Explicit degradation and incomplete reads still report partial
+results. It includes v0.2.1's tolerance for harmless empty login-loopback connections.
 
 Download the versioned installer, inspect it, then run it:
 
 ```sh
-curl -fL https://github.com/tinkrtailor/cleared-cli/releases/download/v0.2.1/install.sh -o install.sh
+curl -fL https://github.com/tinkrtailor/cleared-cli/releases/download/v0.2.2/install.sh -o install.sh
 less install.sh
-sh install.sh --version 0.2.1
+sh install.sh --version 0.2.2
 export PATH="$HOME/.local/bin:$PATH"
 cleared --version
 cleared --help
@@ -32,7 +32,7 @@ shell startup files. Use `--install-dir DIR` to choose another destination. It r
 
 ### Platforms
 
-The four binary targets and their v0.2.1 execution checks are:
+The four binary targets and their v0.2.2 execution checks are:
 
 | Platform | Architecture          | Target                       | Test environment                      |
 | -------- | --------------------- | ---------------------------- | ------------------------------------- |
@@ -42,10 +42,10 @@ The four binary targets and their v0.2.1 execution checks are:
 | Linux    | x86-64                | `x86_64-unknown-linux-musl`  | Native x86-64                         |
 
 These are test environments, not a claim of compatibility with every older OS version.
-**The v0.2.1 macOS binaries are unsigned and not notarized.** macOS may block execution
+**The v0.2.2 macOS binaries are unsigned and not notarized.** macOS may block execution
 or require approval in Privacy & Security; installation is not guaranteed to be seamless.
 
-For manual installation, select `cleared-v0.2.1-TARGET.tar.gz` from the release and
+For manual installation, select `cleared-v0.2.2-TARGET.tar.gz` from the release and
 verify it using `SHA256SUMS`. Each archive includes the executable,
 `DISTRIBUTION-TERMS.txt`, and `THIRD-PARTY-NOTICES.md`.
 
@@ -158,6 +158,7 @@ List customers and invoices, or request JSON output:
 ```sh
 cleared customers list --limit 20
 cleared invoices list --status issued --limit 20
+cleared payments check --customer 'CUSTOMER_UUID' --limit 20
 cleared --json dashboard
 ```
 
