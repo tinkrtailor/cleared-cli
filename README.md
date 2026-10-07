@@ -8,14 +8,18 @@ This repository distributes binaries and public usage documentation. The source 
 is private. Download executables from [Releases](https://github.com/tinkrtailor/cleared-cli/releases);
 GitHub's automatic “Source code” archives contain only this distribution repository.
 
-## Install v0.2.0
+## Install v0.2.1
+
+v0.2.1 tolerates harmless empty connections to the login loopback listener. The
+cause of the original intermittent browser-login failure remains unproven; this
+patch does not establish that all login failures are fixed.
 
 Download the versioned installer, inspect it, then run it:
 
 ```sh
-curl -fL https://github.com/tinkrtailor/cleared-cli/releases/download/v0.2.0/install.sh -o install.sh
+curl -fL https://github.com/tinkrtailor/cleared-cli/releases/download/v0.2.1/install.sh -o install.sh
 less install.sh
-sh install.sh --version 0.2.0
+sh install.sh --version 0.2.1
 export PATH="$HOME/.local/bin:$PATH"
 cleared --version
 cleared --help
@@ -28,7 +32,7 @@ shell startup files. Use `--install-dir DIR` to choose another destination. It r
 
 ### Platforms
 
-The four binary targets and their v0.2.0 execution checks are:
+The four binary targets and their v0.2.1 execution checks are:
 
 | Platform | Architecture          | Target                       | Test environment                      |
 | -------- | --------------------- | ---------------------------- | ------------------------------------- |
@@ -38,10 +42,10 @@ The four binary targets and their v0.2.0 execution checks are:
 | Linux    | x86-64                | `x86_64-unknown-linux-musl`  | Native x86-64                         |
 
 These are test environments, not a claim of compatibility with every older OS version.
-**The v0.2.0 macOS binaries are unsigned and not notarized.** macOS may block execution
+**The v0.2.1 macOS binaries are unsigned and not notarized.** macOS may block execution
 or require approval in Privacy & Security; installation is not guaranteed to be seamless.
 
-For manual installation, select `cleared-v0.2.0-TARGET.tar.gz` from the release and
+For manual installation, select `cleared-v0.2.1-TARGET.tar.gz` from the release and
 verify it using `SHA256SUMS`. Each archive includes the executable,
 `DISTRIBUTION-TERMS.txt`, and `THIRD-PARTY-NOTICES.md`.
 
